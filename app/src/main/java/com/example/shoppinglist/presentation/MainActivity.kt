@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -81,6 +82,7 @@ class MainActivity : AppCompatActivity() {
     private fun setupShotClick() {
         shopListAdapter.onShopItemEditClick = {
             Log.d("MainActivity", "edit click")
+
         }
     }
 
