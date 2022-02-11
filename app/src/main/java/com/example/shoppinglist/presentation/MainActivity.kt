@@ -1,23 +1,16 @@
 package com.example.shoppinglist.presentation
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.widget.LinearLayout
-import android.widget.TextView
-import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ActivityMainBinding
-import com.example.shoppinglist.domain.ShopItem
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityMainBinding
-
     private lateinit var viewModal: MainActivityViewModal
     private lateinit var shopListAdapter: ShopListAdapter
 
@@ -31,10 +24,9 @@ class MainActivity : AppCompatActivity() {
         setupRecycleView()
 
         viewModal.shopList.observe(this) {
-            shopListAdapter.shopList = it
+            shopListAdapter.submitList(it)
 
         }
-
     }
 
     private fun setupRecycleView() {
@@ -70,7 +62,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val item = shopListAdapter.shopList[viewHolder.bindingAdapterPosition]
+                val item = shopListAdapter.currentList[viewHolder.bindingAdapterPosition]
                 viewModal.deleteShopItem(item)
             }
 
