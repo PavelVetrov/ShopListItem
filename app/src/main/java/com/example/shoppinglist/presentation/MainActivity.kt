@@ -1,12 +1,14 @@
 package com.example.shoppinglist.presentation
 
-import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentContainerView
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ActivityMainBinding
 
 
@@ -15,6 +17,7 @@ class MainActivity : AppCompatActivity() {
     private lateinit var binding: ActivityMainBinding
     private lateinit var viewModal: MainActivityViewModal
     private lateinit var shopListAdapter: ShopListAdapter
+    private var shopItemContainer: FragmentContainerView? = null
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,6 +25,8 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
         viewModal = ViewModelProvider(this)[MainActivityViewModal::class.java]
+
+        shopItemContainer = binding.shopItemContainer
 
         setupRecycleView()
 
@@ -31,9 +36,23 @@ class MainActivity : AppCompatActivity() {
         }
 
         binding.ButtonAddShopItem.setOnClickListener {
-          val intent = ShopItemActivity.newIntentAddItem(this)
-            startActivity(intent)
+            if (isOnePadeMode()) {
+                val intent = ShopItemActivity.newIntentAddItem(this)
+                startActivity(intent)
+            } else {
+                launchFragment(ShopItemFragment.newInstanceAddItem())
+            }
         }
+    }
+
+    private fun isOnePadeMode(): Boolean {
+        return shopItemContainer == null
+    }
+
+    private fun launchFragment(fragment: Fragment) {
+        supportFragmentManager.popBackStack()
+        supportFragmentManager.beginTransaction().replace(R.id.shop_item_container, fragment)
+            .addToBackStack(null).commit()
     }
 
     private fun setupRecycleView() {
@@ -80,9 +99,10 @@ class MainActivity : AppCompatActivity() {
 
     private fun setupShotClick() {
         shopListAdapter.onShopItemEditClick = {
-            Log.d("MainActivity", "edit click")
-            val intent = ShopItemActivity.newIntentEditItem(this,it.id)
-            startActivity(intent)
+            if (isOnePadeMode()) {
+                val intent = ShopItemActivity.newIntentEditItem(this, it.id)
+                startActivity(intent)
+            } else launchFragment(ShopItemFragment.newInstanceEditItem(it.id))
 
         }
     }
