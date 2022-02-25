@@ -16,10 +16,8 @@ import com.example.shoppinglist.domain.ShopItem
 
 class ShopItemFragment : Fragment() {
 
-
     private lateinit var viewModel: ShopItemViewModel
     private lateinit var onEditingFinishedListener: OnEditingFinishedListener
-
 
     private lateinit var binding: FragmentShopItemBinding
 
@@ -114,6 +112,7 @@ class ShopItemFragment : Fragment() {
     private fun launchAddMode() {
         binding.saveButton.setOnClickListener {
             viewModel.addShopItem(binding.etName.text?.toString(), binding.etCount.text?.toString())
+
         }
 
     }
@@ -151,10 +150,9 @@ class ShopItemFragment : Fragment() {
             shopItemId = args.getInt(ID_SHOP_ITEM, ShopItem.UNDEFINED_ID)
         }
 
-
     }
 
-    interface OnEditingFinishedListener{
+    interface OnEditingFinishedListener {
         fun onEditingFinished()
     }
 
@@ -173,7 +171,6 @@ class ShopItemFragment : Fragment() {
                 }
             }
 
-
         }
 
         fun newInstanceEditItem(shopItemId: Int): ShopItemFragment {
@@ -184,9 +181,7 @@ class ShopItemFragment : Fragment() {
                 }
             }
 
-
         }
-
 
     }
 

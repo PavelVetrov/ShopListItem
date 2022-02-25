@@ -7,8 +7,7 @@ import com.example.shoppinglist.R
 import com.example.shoppinglist.domain.ShopItem
 
 class ShopListAdapter :
-    ListAdapter<ShopItem,ShopItemViewHolder>(ShopItemDiffCallBack()) {
-
+    ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCallBack()) {
 
     var onShopItemLongClick: ((ShopItem) -> Unit)? = null
     var onShopItemEditClick: ((ShopItem) -> Unit)? = null

@@ -9,7 +9,7 @@ import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ActivityShopItemBinding
 import com.example.shoppinglist.domain.ShopItem
 
-class ShopItemActivity : AppCompatActivity(),ShopItemFragment.OnEditingFinishedListener {
+class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
 
     private var screenMode = MODE_UNKNOWN
     private var shopItemId = ShopItem.UNDEFINED_ID
@@ -21,15 +21,14 @@ class ShopItemActivity : AppCompatActivity(),ShopItemFragment.OnEditingFinishedL
         setContentView(binding.root)
 
         parseIntent()
-        if (savedInstanceState ==null){
+        if (savedInstanceState == null) {
             launchRightMode()
-            }
+        }
     }
 
     override fun onEditingFinished() {
 
-        Toast.makeText(this, "Success",Toast.LENGTH_SHORT).show()
-        supportFragmentManager.popBackStack()
+        finish()
     }
 
     private fun launchRightMode() {
@@ -38,7 +37,8 @@ class ShopItemActivity : AppCompatActivity(),ShopItemFragment.OnEditingFinishedL
             MODE_ADD -> ShopItemFragment.newInstanceAddItem()
             else -> throw RuntimeException("Unknown mode ")
         }
-        supportFragmentManager.beginTransaction().replace(R.id.shop_item_container, fragment).commit()
+        supportFragmentManager.beginTransaction().replace(R.id.shop_item_container, fragment)
+            .commit()
 
     }
 
