@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.room.*
 
 @Dao
-interface ShopListDao {
+interface  ShopListDao {
 
     @Query("SELECT*FROM shop_items")
     fun getShopList(): LiveData<List<ShopItemDbModal>>

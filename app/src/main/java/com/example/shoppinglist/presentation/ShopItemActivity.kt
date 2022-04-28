@@ -3,7 +3,6 @@ package com.example.shoppinglist.presentation
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
-import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ActivityShopItemBinding
@@ -24,6 +23,7 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
         if (savedInstanceState == null) {
             launchRightMode()
         }
+
     }
 
     override fun onEditingFinished() {
@@ -39,7 +39,6 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
         }
         supportFragmentManager.beginTransaction().replace(R.id.shop_item_container, fragment)
             .commit()
-
     }
 
     private fun parseIntent() {
@@ -70,7 +69,6 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
             val intent = Intent(context, ShopItemActivity::class.java)
             intent.putExtra(EXTRA_SCREEN_MODE, MODE_ADD)
             return intent
-
         }
 
         fun newIntentEditItem(context: Context, shopItemId: Int): Intent {
@@ -80,5 +78,4 @@ class ShopItemActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinished
             return intent
         }
     }
-
 }

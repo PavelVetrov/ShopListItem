@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.FragmentShopItemBinding
 import com.example.shoppinglist.domain.ShopItem
+import javax.inject.Inject
 
 
 class ShopItemFragment : Fragment() {
@@ -24,8 +25,17 @@ class ShopItemFragment : Fragment() {
     private var screenMode: String = MODE_UNKNOWN
     private var shopItemId: Int = ShopItem.UNDEFINED_ID
 
+    @Inject
+    lateinit var viewModalFactory: ViewModalFactory
+
+    private val component by lazy {
+        (requireActivity().application as ShopItemApplication).component
+    }
+
 
     override fun onAttach(context: Context) {
+
+        component.inject(this)
         super.onAttach(context)
         if (context is OnEditingFinishedListener)
             onEditingFinishedListener = context
@@ -40,15 +50,16 @@ class ShopItemFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentShopItemBinding.inflate(layoutInflater, container, false)
-        viewModel = ViewModelProvider(this)[ShopItemViewModel::class.java]
+        viewModel = ViewModelProvider(this, viewModalFactory)[ShopItemViewModel::class.java]
 
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         addTextChangeListeners()
         launchRightMode()
         observeViewModal()
@@ -111,7 +122,10 @@ class ShopItemFragment : Fragment() {
 
     private fun launchAddMode() {
         binding.saveButton.setOnClickListener {
-            viewModel.addShopItem(binding.etName.text?.toString(), binding.etCount.text?.toString())
+            viewModel.addShopItem(
+                binding.etName.text?.toString(),
+                binding.etCount.text?.toString()
+            )
 
         }
 
@@ -120,6 +134,7 @@ class ShopItemFragment : Fragment() {
     private fun launchEditMode() {
 
         viewModel.getShopItem(shopItemId)
+
         viewModel.shopItem.observe(viewLifecycleOwner) {
             binding.etName.setText(it.name)
             binding.etCount.setText(it.count.toString())
@@ -168,6 +183,7 @@ class ShopItemFragment : Fragment() {
             return ShopItemFragment().apply {
                 arguments = Bundle().apply {
                     putString(SCREEN_MODE, MODE_ADD)
+
                 }
             }
 

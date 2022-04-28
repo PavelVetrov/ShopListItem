@@ -1,7 +1,6 @@
 package com.example.shoppinglist.presentation
 
 import android.os.Bundle
-import android.util.Log
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
@@ -11,6 +10,7 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ActivityMainBinding
+import javax.inject.Inject
 
 
 class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedListener {
@@ -20,12 +20,21 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
     private lateinit var shopListAdapter: ShopListAdapter
     private var shopItemContainer: FragmentContainerView? = null
 
+    @Inject
+    lateinit var viewModalFactory: ViewModalFactory
+
+    private val component by lazy {
+        (application as ShopItemApplication).component
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
+
+        component.inject(this)
+
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
-        viewModal = ViewModelProvider(this)[MainActivityViewModal::class.java]
+        viewModal = ViewModelProvider(this, viewModalFactory)[MainActivityViewModal::class.java]
 
         shopItemContainer = binding.shopItemContainer
 
@@ -33,7 +42,6 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
 
         viewModal.shopList.observe(this) {
             shopListAdapter.submitList(it)
-
         }
 
         binding.ButtonAddShopItem.setOnClickListener {
@@ -109,8 +117,8 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
             if (isOnePadeMode()) {
                 val intent = ShopItemActivity.newIntentEditItem(this, it.id)
                 startActivity(intent)
-            } else launchFragment(ShopItemFragment.newInstanceEditItem(it.id))
 
+            } else launchFragment(ShopItemFragment.newInstanceEditItem(it.id))
         }
     }
 
