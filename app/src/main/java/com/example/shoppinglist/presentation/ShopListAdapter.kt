@@ -10,7 +10,7 @@ class ShopListAdapter :
     ListAdapter<ShopItem, ShopItemViewHolder>(ShopItemDiffCallBack()) {
 
     var onShopItemLongClick: ((ShopItem) -> Unit)? = null
-    var onShopItemEditClick: ((ShopItem) -> Unit)? = null
+    var onShopItemShotClick: ((ShopItem) -> Unit)? = null
 
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ShopItemViewHolder {
@@ -35,7 +35,7 @@ class ShopListAdapter :
         }
         holder.itemView.setOnClickListener {
 
-            onShopItemEditClick?.invoke(shopItem)
+            onShopItemShotClick?.invoke(shopItem)
         }
     }
 

@@ -128,7 +128,6 @@ class ShopItemFragment : Fragment() {
             )
 
         }
-
     }
 
     private fun launchEditMode() {

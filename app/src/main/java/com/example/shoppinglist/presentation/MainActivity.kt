@@ -113,7 +113,7 @@ class MainActivity : AppCompatActivity(), ShopItemFragment.OnEditingFinishedList
     }
 
     private fun setupShotClick() {
-        shopListAdapter.onShopItemEditClick = {
+        shopListAdapter.onShopItemShotClick = {
             if (isOnePadeMode()) {
                 val intent = ShopItemActivity.newIntentEditItem(this, it.id)
                 startActivity(intent)
