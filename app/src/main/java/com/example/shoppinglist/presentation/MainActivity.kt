@@ -10,6 +10,8 @@ import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.ActivityMainBinding
+import com.example.shoppinglist.presentation.viewmodal.MainActivityViewModal
+import com.example.shoppinglist.presentation.viewmodal.ViewModalFactory
 import javax.inject.Inject
 
 

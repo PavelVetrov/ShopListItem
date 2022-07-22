@@ -1,8 +1,8 @@
 package com.example.shoppinglist.di
 
 import androidx.lifecycle.ViewModel
-import com.example.shoppinglist.presentation.MainActivityViewModal
-import com.example.shoppinglist.presentation.ShopItemViewModel
+import com.example.shoppinglist.presentation.viewmodal.MainActivityViewModal
+import com.example.shoppinglist.presentation.viewmodal.ShopItemViewModel
 import dagger.Binds
 import dagger.Module
 import dagger.multibindings.IntoMap

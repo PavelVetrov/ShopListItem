@@ -12,6 +12,8 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.shoppinglist.R
 import com.example.shoppinglist.databinding.FragmentShopItemBinding
 import com.example.shoppinglist.domain.ShopItem
+import com.example.shoppinglist.presentation.viewmodal.ShopItemViewModel
+import com.example.shoppinglist.presentation.viewmodal.ViewModalFactory
 import javax.inject.Inject
 
 
