@@ -6,3 +6,6 @@ This project is my very first  learning Android app. This's a shopping list app.
 + [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 + [Dagger2](https://github.com/google/dagger) for dependency injection
 + [Retrofit2 & Gson](https://github.com/square/retrofit) for REST API
+
+## Screenshots
+
