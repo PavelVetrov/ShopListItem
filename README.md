@@ -1,5 +1,5 @@
 # ShopingList
-This project is my very first  learning Android app. This's a shopping list app. The user can create shopping lists, delete or editor their.
+This project is my first learning Android app. This's a shopping list app. The user can create shopping lists, delete or editor their.
 ## Libraries
 + MVVM Architecture
 + Architecture Components (Lifecycle, LiveData, ViewModel, ViewBinding, Room)
