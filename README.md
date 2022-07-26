@@ -6,7 +6,6 @@ This project is my very first  learning Android app. This's a shopping list app.
 + RecyclerView and CardViews
 + [Coroutines](https://kotlinlang.org/docs/coroutines-overview.html)
 + [Dagger2](https://github.com/google/dagger) for dependency injection
-+ [Retrofit2 & Gson](https://github.com/square/retrofit) for REST API
 
 ## Screenshots
 <img src="https://user-images.githubusercontent.com/99405613/180814494-838df85b-a377-4452-a43f-c70b62596215.jpg" width="200"> <img src="https://user-images.githubusercontent.com/99405613/180814487-b0430303-1e36-4e31-935b-203fd179d52b.jpg" width="200">
